@@ -1,6 +1,6 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # ============================================================
-#  SUMON 9X — Combined Setup (Mobile Optimized - Big Text)
+#  SUMON — Combined Setup (Mobile Optimized - Big Text)
 #  1) Shows the full DARK-style banner (pink box + block letters
 #     + gradient + green "Boot Script 2.0") — fits phone screens
 #  2) Installs the pink prompt style
@@ -53,7 +53,7 @@ draw_banner() {
     F[9]="01110 10001 10001 01111 00001 00010 01100"
     F[' ']="000 000 000 000 000 000 000"
 
-    WORD="SUMON9X"
+    WORD="SUMON"
     GAP=0
     SCALE=2
     HEIGHT=2
