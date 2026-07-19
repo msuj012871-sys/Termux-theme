@@ -57,7 +57,7 @@ draw_banner() {
 
     WORD="SUMON 9X"
     GAP=2
-    PIX="██"
+    PIX="███"
     GRAD=(93 92 63 69 68 74 75 81 51 50 45)
     NCOL=${#GRAD[@]}
 
@@ -80,7 +80,7 @@ draw_banner() {
     done
 
     local GLYPHW=${#ROWS[0]}
-    local LINEW=$(( GLYPHW * 2 ))
+    local LINEW=$(( GLYPHW * 3 ))
     local SUB="Boot Script 2.0"
     local BOXW=$(( LINEW + 6 ))
     (( BOXW < ${#SUB} + 8 )) && BOXW=$(( ${#SUB} + 8 ))
@@ -96,19 +96,39 @@ draw_banner() {
     printf "${PINK}│${RESET}%*s${PINK}│${RESET}\n" "$BOXW" ""
 
     local leftpad=$(( (BOXW - LINEW) / 2 ))
-    local row bit idx c rightpad
+    local row bit idx c rightpad rep
     for r in 0 1 2 3 4 5 6; do
         row="${ROWS[$r]}"
-        printf "${PINK}│${RESET}%*s" "$leftpad" ""
-        for ((c=0; c<${#row}; c++)); do
-            bit="${row:$c:1}"
-            idx=$(( c % NCOL ))
-            if [[ "$bit" == "1" ]]; then
-                printf "\033[1;38;5;%sm%s${RESET}" "${GRAD[$idx]}" "$PIX"
-            else
-                printf "  "
-            fi
+        for rep in 1 2; do
+            printf "${PINK}│${RESET}%*s" "$leftpad" ""
+            for ((c=0; c<${#row}; c++)); do
+                bit="${row:$c:1}"
+                idx=$(( c % NCOL ))
+                if [[ "$bit" == "1" ]]; then
+                    printf "\033[1;38;5;%sm%s${RESET}" "${GRAD[$idx]}" "$PIX"
+                else
+                    printf "   "
+                fi
+            done
+            rightpad=$(( BOXW - leftpad - LINEW ))
+            printf "%*s${PINK}│${RESET}\n" "$rightpad" ""
         done
+    done
+
+    printf "${PINK}│${RESET}%*s${PINK}│${RESET}\n" "$BOXW" ""
+    local subpad=$(( BOXW - ${#SUB} - 2 ))
+    printf "${PINK}│${RESET}%*s${GREEN}${BOLD}%s${RESET}  ${PINK}│${RESET}\n" "$subpad" "" "$SUB"
+    hline "╰" "╯"
+    echo ""
+}
+
+# ---------- PART 2: the pink prompt style ----------
+set_prompt() {
+    PS1="\[\033[38;5;213m\]┌─\[\033[0m\][\[\033[38;5;51m\]SUMON\[\033[0m\]@termux]\[\033[38;5;213m\]─(\[\033[0m\]\w\[\033[38;5;213m\])\[\033[0m\]\n\[\033[38;5;213m\]└──╼\[\033[0m\] "
+}
+
+draw_banner
+set_prompt        done
         rightpad=$(( BOXW - leftpad - LINEW ))
         printf "%*s${PINK}│${RESET}\n" "$rightpad" ""
     done
