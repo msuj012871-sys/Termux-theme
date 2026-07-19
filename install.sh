@@ -3,7 +3,7 @@ pkg update -y
 pkg install git ruby figlet toilet -y
 gem install lolcat
 mkdir -p ~/.termux
-cp .termux/colors.properties ~/.termux/colors.properties
+cp sumon/colors.properties ~/.termux/colors.properties
 cat >> ~/.bashrc <<'EOF'
 clear
 figlet -f big SUMON | lolcat
