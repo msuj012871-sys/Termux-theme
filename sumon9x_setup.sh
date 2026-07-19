@@ -1,11 +1,9 @@
 #!/data/data/com.termux/files/usr/bin/bash
 # ============================================================
-#  SUMON 9X — Combined Setup
+#  SUMON 9X — Combined Setup (Mobile Optimized)
 #  1) Shows the full DARK-style banner (pink box + block letters
-#     + gradient + green "Boot Script 2.0")
-#  2) Installs the pink prompt style:
-#       ┌─[SUMON@termux]─(~)
-#       └──╼ your command here
+#     + gradient + green "Boot Script 2.0") — fits phone screens
+#  2) Installs the pink prompt style
 # ============================================================
 
 # ---------- PART 1: draw the banner ----------
@@ -58,7 +56,7 @@ draw_banner() {
     WORD="SUMON9X"
     GAP=1
     SCALE=1
-    HEIGHT=3
+    HEIGHT=2
     GRAD=(93 92 63 69 68 74 75 81 51 50 45)
     NCOL=${#GRAD[@]}
 
@@ -86,8 +84,8 @@ draw_banner() {
     for ((s=0; s<SCALE; s++)); do PIX="${PIX}█"; done
     local LINEW=$(( GLYPHW * SCALE ))
     local SUB="Boot Script 2.0"
-    local BOXW=$(( LINEW + 6 ))
-    (( BOXW < ${#SUB} + 8 )) && BOXW=$(( ${#SUB} + 8 ))
+    local BOXW=$(( LINEW + 4 ))
+    (( BOXW < ${#SUB} + 6 )) && BOXW=$(( ${#SUB} + 6 ))
 
     hline() {
         printf "${PINK}%s" "$1"
